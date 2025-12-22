@@ -8,6 +8,8 @@ int main()
     insertNewNode(&arbre,70);
     insertNewNode(&arbre,77);
     insertNewNode(&arbre,75);
-    insertNewNode(&arbre,63);
+    insertNewNode(&arbre,60);
+
+    DesplaybyLevel(arbre);
     return 0 ;
 }
