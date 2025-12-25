@@ -126,10 +126,9 @@ class AVLTree :
     
     def delete(self, root, key):
         # --- ÉTAPE 1 : Suppression standard BST ---
-        
+     
         if not root:
             return root
-
         # Recherche du nœud à supprimer
         elif key < root.key:
             root.left = self.delete(root.left, key)
@@ -148,7 +147,6 @@ class AVLTree :
                 temp = root.left
                 root = None
                 return temp
-
             # Cas C : Deux enfants
             # On cherche le successeur (le plus petit du côté droit)
             temp = self._get_min_value_node(root.right)
@@ -156,40 +154,31 @@ class AVLTree :
             # On copie les infos du successeur dans le nœud actuel
             root.key = temp.key
             root.file = temp.file # Important : on copie aussi le fichier !
-
-            # On supprime l'ancien successeur (qui est maintenant un doublon)
+           # On supprime l'ancien successeur (qui est maintenant un doublon)
             root.right = self.delete(root.right, temp.key)
 
         # Si l'arbre n'avait qu'un seul nœud et qu'il est supprimé
         if root is None:
             return root
-
         # --- ÉTAPE 2 : Mise à jour de la hauteur ---
         root.height = 1 + max(self._get_height(root.left), self._get_height(root.right))
-
         # --- ÉTAPE 3 : Vérification de l'équilibre ---
         balance = self._get_balance(root)
-
         # --- ÉTAPE 4 : Rotations (si déséquilibré) ---
-        
-        # Cas LL
+        # CasLL
         if balance > 1 and self._get_balance(root.left) >= 0:
             return self._right_rotate(root)
-
         # Cas LR
         if balance > 1 and self._get_balance(root.left) < 0:
             root.left = self._left_rotate(root.left)
             return self._right_rotate(root)
-
         # Cas RR
         if balance < -1 and self._get_balance(root.right) <= 0:
             return self._left_rotate(root)
-
         # Cas RL
         if balance < -1 and self._get_balance(root.right) > 0:
             root.right = self._right_rotate(root.right)
             return self._left_rotate(root)
-
         return root
     
     # --- 3. APPLICATION TERMINALE (INTERFACE) ---
