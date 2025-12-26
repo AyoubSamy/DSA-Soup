@@ -77,7 +77,15 @@ def compresser_fichier(chemin_de_fichier):
     heap = initialiser_heap(frequence)
     arbre_huffman = construire_arbre(heap)
     codes = generer_codes(arbre_huffman)
-    encoded_texte = encoder_texte(texte, codes)
+    # print("\nTable des codes de Huffman :")
+    # for caractere, code in codes.items():
+    #     if caractere == '\n':
+    #         print("'\\n' :", code)
+    #     elif caractere == ' ':
+    #      print("' '  :", code)
+    #     else:
+    #         print(f"'{caractere}' :", code)
+    # encoded_texte = encoder_texte(texte, codes)
     return encoded_texte
 
 # decoder le texte encode en utilisant l'arbre de Huffman
