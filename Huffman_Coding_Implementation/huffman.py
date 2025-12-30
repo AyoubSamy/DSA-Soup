@@ -148,19 +148,32 @@ def visualiser_arbre(noeud, dot=None):
     
     return dot
 
+
+
 # Exemple d'utilisation
+
+texte = read_fichier("fichier.txt")
+frequence = calculer_frequence(texte)
+heap = initialiser_heap(frequence)
+arbre_huffman = construire_arbre(heap)
+
 encoded_texte = compresser_fichier("fichier.txt")
 
-decoded_texte = decoder_texte(encoded_texte, construire_arbre(initialiser_heap(calculer_frequence(read_fichier("fichier.txt")))))
+decoded_texte = decoder_texte(encoded_texte,arbre_huffman)
 
-taux, gain = calculer_taux_compression_et_gain(read_fichier("fichier.txt"), encoded_texte)
+taux, gain = calculer_taux_compression_et_gain(texte, encoded_texte)
+
 print("Texte encodé :", encoded_texte)
+
 print("Texte décodé :", decoded_texte)
+
 print("Taux de compression :", taux)
+
 print("Gain de compression :", gain)
 
 
-arbre_huffman = construire_arbre(initialiser_heap(calculer_frequence(read_fichier("fichier.txt"))))
 dot = visualiser_arbre(arbre_huffman)
+
 dot.render('arbre_huffman', format='png', cleanup=True)
+
 print("\nArbre sauvegardé dans arbre_huffman.png")
